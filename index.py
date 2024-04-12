@@ -1,31 +1,23 @@
-#dunder
-__version__ = "0.1.0"
-__author__ = "Gabriel Victor"
-__license__ = "Unlincese"
+import textwrap
 
-import os
-import sys
-import datetime
-import keyboard
+def menu():
+    menu = """\n
+    ================ MENU ================
+    [d]\tDepositar
+    [s]\tSacar
+    [e]\tExtrato
+    [c]\tNova conta
+    [l]\tListar contas
+    [u]\tNovo usuário
+    [q]\tSair
+    => """
+    return input(textwrap.dedent(menu))
 
-
-#Menu do sistema
-menu ='''
-
-BANKING SYSTEM
-
-[d] Deposito
-[s] Saque
-[e] Extrato
-[q] Sair
-
-=>
-'''
-
-"""
-funçoes :
-login , registre-se
-usuario --> dados --> cpf {dados}
-criar contas correntes --> movimentação --> saque , deposito , extratos
-config --> editar dados da conta() , deletar conta ()
-"""
+def depositar(saldo, valor, extrato, /):
+    if valor > 0:
+        saldo += valor
+        extrato += f"Depósito:\tR$ {valor:.2f}\n"
+        print("\n=== Depósito realizado com sucesso! ===")
+    else:
+        print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
+    return saldo , extrato
