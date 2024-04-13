@@ -21,3 +21,27 @@ def depositar(saldo, valor, extrato, /):
     else:
         print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
     return saldo , extrato
+
+def main():
+    LIMITE_SAQUES = 3
+    AGENCIA = "0001"
+
+    saldo = 0
+    limite = 500
+    extrato = ""
+    numero_saques = 0
+    usuarios = []
+    contas = []
+    while True:
+        opcao = menu()
+
+        if opcao == 'd':
+            valor = float(input("Informe o valor do depósito: "))
+
+            saldo, extrato = depositar(saldo, valor, extrato)
+
+
+
+
+
+main()
