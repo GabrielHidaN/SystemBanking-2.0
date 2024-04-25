@@ -1,5 +1,5 @@
 import textwrap
-
+import os
 def menu():
     menu = """\n
     ================ MENU ================
@@ -14,20 +14,22 @@ def menu():
     return input(textwrap.dedent(menu))
 
 def depositar(saldo, valor, extrato, /):
+    os.system('cls')
     if valor > 0:
         saldo += valor
-        extrato += f"Depósito:\tR$ {valor:.2f}\n"
+        extrato += f"Depósito: R$ {valor:.2f}\n"
         print("\n=== Depósito realizado com sucesso! ===")
     else:
         print("\n@@@ Operação falhou! O valor informado é inválido. @@@")
     return saldo , extrato
 
 def sacar (*, saldo, valor,extrato, limite, numero_saques, limite_saques ):
+    os.system('cls')
     if numero_saques < limite_saques:
         if valor > 0 and valor <= limite:
             if valor <= saldo:
                 saldo -= valor
-                extrato += f"Saque:\tR$ {valor:.2f}\n"
+                extrato += f"Saque:  R$ {valor:.2f}\n"
                 print("\n=== Saque realizado com sucesso! ===")
                 numero_saques += 1
 
@@ -42,6 +44,11 @@ def sacar (*, saldo, valor,extrato, limite, numero_saques, limite_saques ):
         print("\n@@@ Você Não tem Mais Saques Disponiveis Hoje. Volte amanhã e tente Novamente!")
     return saldo , extrato , numero_saques
 
+def exibir_extrato(saldo , / , * , extrato):
+    os.system('cls')
+    saldo = saldo
+    saldoTotal = f'Seu Saldo Atual é R$ {saldo:.2f} \n'
+    return   saldoTotal , extrato
 def main():
     LIMITE_SAQUES = 3
     AGENCIA = "0001"
@@ -60,10 +67,20 @@ def main():
 
             saldo, extrato  = depositar(saldo, valor, extrato)
 
-        if opcao == 's':
+        elif opcao == 's':
             valor = float(input("Informe o valor do saque: "))
-            
+
             saldo, extrato , numero_saques = sacar(saldo=saldo , valor=valor , extrato= extrato , limite= limite , numero_saques= numero_saques, limite_saques= LIMITE_SAQUES)
+
+        elif opcao == 'e':
+            if len(extrato) == 0:
+                print('sem extrato')
+            else:
+                extratos = exibir_extrato(saldo , extrato= extrato)
+                extratos = list(extratos)
+                for  i in extratos:
+                    print(i)
+
 
 
 main()
