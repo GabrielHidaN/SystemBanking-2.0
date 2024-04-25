@@ -29,6 +29,8 @@ def sacar (*, saldo, valor,extrato, limite, numero_saques, limite_saques ):
                 saldo -= valor
                 extrato += f"Saque:\tR$ {valor:.2f}\n"
                 print("\n=== Saque realizado com sucesso! ===")
+                numero_saques += 1
+
             else:
                 print("\n@@@ Operação falhou! Saldo Insuficiente Para concluir essa  Operação. @@@")
         else:
@@ -38,7 +40,7 @@ def sacar (*, saldo, valor,extrato, limite, numero_saques, limite_saques ):
                 print("\n@@@ Operação falhou! O valor informado é inválido , O  valor deve ser abaixo de R$ 500,00 . @@@")
     else:
         print("\n@@@ Você Não tem Mais Saques Disponiveis Hoje. Volte amanhã e tente Novamente!")
-    return saldo , extrato
+    return saldo , extrato , numero_saques
 
 def main():
     LIMITE_SAQUES = 3
@@ -48,7 +50,6 @@ def main():
     limite = 500
     extrato = ""
     numero_saques = 0
-    limite_saques_diarios = 3
     usuarios = []
     contas = []
     while True:
@@ -57,11 +58,12 @@ def main():
         if opcao == 'd':
             valor = float(input("Informe o valor do depósito: "))
 
-            saldo, extrato = depositar(saldo, valor, extrato)
+            saldo, extrato  = depositar(saldo, valor, extrato)
 
         if opcao == 's':
             valor = float(input("Informe o valor do saque: "))
-            saldo, extrato = sacar(saldo=saldo , valor=valor , extrato= extrato , limite= limite , numero_saques= numero_saques, limite_saques= limite_saques_diarios)
+            
+            saldo, extrato , numero_saques = sacar(saldo=saldo , valor=valor , extrato= extrato , limite= limite , numero_saques= numero_saques, limite_saques= LIMITE_SAQUES)
 
 
 main()
