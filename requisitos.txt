@@ -1,3 +1,0 @@
-saque = keyOnly
-saldo , valor , extrato, limite , numero_saques, limite_saques
-retornar saldo e extrato
