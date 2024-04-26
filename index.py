@@ -99,15 +99,39 @@ def main():
 
         if opcao == 'd':
             os.system('cls')
-            valor = float(input("Informe o valor do depósito: "))
+            valor = input("Informe o valor do depósito: ")
+            validacao = None
+            try:
+                valor = float(valor)
+                validacao = True
+            except ValueError:
+                print("\n@@@ Você Deve Informar Um Valor Válido!")
+                validacao = None
+            except:
+                print("\n@@@ Erro Desconhecido!")
+                validacao = None
 
-            saldo, extrato  = depositar(saldo, valor, extrato,data_e_hora_atuais)
+            if validacao == True:
+
+                saldo, extrato  = depositar(saldo, valor, extrato,data_e_hora_atuais)
 
         elif opcao == 's':
             os.system('cls')
-            valor = float(input("Informe o valor do saque: "))
+            valor = input("Informe o valor do saque: ")
+            validacao = None
+            try:
+                valor = float(valor)
+                validacao = True
 
-            saldo, extrato , numero_saques = sacar(saldo=saldo , valor=valor , extrato= extrato , limite= limite , numero_saques= numero_saques, limite_saques= LIMITE_SAQUES , data_e_hora_atuais= data_e_hora_atuais)
+            except ValueError:
+                print("\n@@@ Você Deve Informar Um Valor Válido!")
+                validacao = None
+            except:
+                print("\n@@@ Erro Desconhecido!")
+                validacao = None
+
+            if validacao == True:
+                saldo, extrato , numero_saques = sacar(saldo=saldo , valor=valor ,  extrato= extrato , limite= limite , numero_saques= numero_saques,    limite_saques= LIMITE_SAQUES , data_e_hora_atuais=     data_e_hora_atuais)
 
         elif opcao == 'e':
             os.system('cls')
