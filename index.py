@@ -81,11 +81,21 @@ def exibir_extrato(saldo , / , * , extrato):
         @@@@@ Seu Saldo Atual é R$ {saldo:.2f} @@@@@
     '''
     return   saldoTotal , extrato
+
+def criar_usuario(*, cpf, name ,lastName ):
+    os.system('cls')
+    usuario = {'cpf': cpf, 'nome': name, 'sobre nome': lastName}
+
+    return usuario
+
+def criar_conta (*, cpf , agencia):
+    ...
+    
 def main():
     LIMITE_SAQUES = 3
     AGENCIA = "0001"
 
-    saldo = 500
+    saldo = 0
     limite = 500
     extrato = ""
     numero_saques = 0
@@ -143,6 +153,29 @@ def main():
                 for  i in extratos:
                     print(i)
 
+        elif opcao == 'c':
+            ...
+
+        elif opcao == 'l':
+            ...
+
+        elif opcao=='u':
+            os.system('cls')
+            user_cpf = int(input('Digite o CPF que deseja Registrar: \n'))
+            os.system('cls')
+            user_name = str(input('Digite o Seu Primeiro Nome: \n'))
+            os.system('cls')
+            user_lastName = str(input('Digite o Seu ultimo Nome: \n'))
+
+            newUser = criar_usuario(cpf=user_cpf , name= user_name , lastName= user_lastName)
+
+            usuarios.append(newUser)
+
+        elif opcao == 'q':
+            break
+
+        else:
+            print()
 
 
 main()
