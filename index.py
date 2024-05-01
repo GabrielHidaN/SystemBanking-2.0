@@ -15,6 +15,47 @@ def menu():
     => """
     return input(textwrap.dedent(menu))
 
+
+def validar_cpf(cpfEnviado):
+
+    resultado_digito_1 = 0
+
+    cpfEnviado = cpfEnviado
+    noveDigitos = cpfEnviado[:9]
+
+    regressar1 = 10
+    for digito in noveDigitos:
+      resultado_digito_1 += int(digito) * int(regressar1)
+      regressar1 -= 1
+    primeiroDigito = (resultado_digito_1 * 10) % 11
+
+    primeiroDigito = primeiroDigito if primeiroDigito <= 9 else 0
+
+
+
+    dezDigitos = noveDigitos + str(primeiroDigito)
+    regressar2 = 11
+
+    resultado2 = 0
+
+    for digito in dezDigitos:
+      resultado2 += int(digito) * regressar2
+      regressar2 -= 1
+    segundoDigito = (resultado2 * 10) % 11
+    segundoDigito= segundoDigito if segundoDigito <= 9 else 0
+
+    cpfGerado = f'{noveDigitos}{primeiroDigito}{segundoDigito}'
+
+
+    valido = None
+
+    if cpfEnviado == cpfGerado :
+      valido = True
+    else:
+      valido = False
+
+    return valido
+
 def depositar(saldo, valor, extrato,data_e_hora_atuais, /):
     os.system('cls')
 
@@ -90,7 +131,7 @@ def criar_usuario(*, cpf, name ,lastName ):
 
 def criar_conta (*, cpf , agencia):
     ...
-    
+
 def main():
     LIMITE_SAQUES = 3
     AGENCIA = "0001"
@@ -161,8 +202,13 @@ def main():
 
         elif opcao=='u':
             os.system('cls')
-            user_cpf = int(input('Digite o CPF que deseja Registrar: \n'))
+            user_cpf = input('Digite o CPF que deseja Registrar: \n')
             os.system('cls')
+            validate_cpf = validar_cpf(user_cpf)
+            if validate_cpf == False:
+                print(f'@@@ CPF Inválido!@@@')
+                continue
+
             user_name = str(input('Digite o Seu Primeiro Nome: \n'))
             os.system('cls')
             user_lastName = str(input('Digite o Seu ultimo Nome: \n'))
