@@ -15,7 +15,6 @@ def menu():
     => """
     return input(textwrap.dedent(menu))
 
-
 def validar_cpf(cpfEnviado):
 
     resultado_digito_1 = 0
@@ -123,15 +122,8 @@ def exibir_extrato(saldo , / , * , extrato):
     '''
     return   saldoTotal , extrato
 
-def criar_usuario(*, cpf, name ,lastName ):
-    os.system('cls')
-    usuario = {'cpf': cpf, 'nome': name, 'sobre nome': lastName}
-
-    return usuario
-
-def criar_conta (*, cpf , agencia):
+def criar_usuario(usuarios):
     ...
-
 def main():
     LIMITE_SAQUES = 3
     AGENCIA = "0001"
@@ -201,21 +193,8 @@ def main():
             ...
 
         elif opcao=='u':
-            os.system('cls')
-            user_cpf = input('Digite o CPF que deseja Registrar: \n')
-            os.system('cls')
-            validate_cpf = validar_cpf(user_cpf)
-            if validate_cpf == False:
-                print(f'@@@ CPF Inválido!@@@')
-                continue
+            ...
 
-            user_name = str(input('Digite o Seu Primeiro Nome: \n'))
-            os.system('cls')
-            user_lastName = str(input('Digite o Seu ultimo Nome: \n'))
-
-            newUser = criar_usuario(cpf=user_cpf , name= user_name , lastName= user_lastName)
-
-            usuarios.append(newUser)
 
         elif opcao == 'q':
             break
