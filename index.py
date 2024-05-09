@@ -121,8 +121,45 @@ def exibir_extrato(saldo , / , * , extrato):
     '''
     return   saldoTotal , extrato
 
-def criar_usuario(usuario):
-    ...
+def criar_usuario(cpf_enviado , validate_cpf):
+    cpf_user = cpf_enviado
+    validate_cpf = validate_cpf
+
+    if validate_cpf is True:
+        os.system('cls')
+        name_user = input('Digite seu Nome \n => ')
+        validate_name =  name_user.isdigit()
+
+        if validate_name is False:
+            os.system('cls')
+            print('===== Endereço =====')
+            state = input ('Digite o seu Estado \n => ')
+            cep = input('Digite o seu CEP \n => ')
+            city = input('Digite a sua Cidade \n => ')
+            district = input('Digite o seu Bairro \n => ')
+            number_house = input('Digite o Número da sua casa \n => ')
+            validade_number_house = number_house.isdigit()
+
+            if validade_number_house == True:
+                os.system('cls')
+                number_phone = input('Digite o seu Número de telefone \n =>')
+                validade_number_phone = number_phone.isdigit()
+                
+                if validade_number_phone is True:
+                    registrando_user = {'cpf': cpf_user , 'name': name_user , 'phone': number_phone , 'adders': {'state': state , 'cep': cep , 'city': city , 'district': district , 'numberHouse': number_house}}
+
+                    return registrando_user
+                else:
+                    return '@@@ Número de Telefone Inválido. ex: 81997665123 @@@'
+            else:
+                return '@@@ Número Inválido. ex: "44" @@@'
+
+        else:
+            return '@@@ Nome Inválido , Você deve inserir um Nome Real @@@'
+
+    else:
+        return '@@@ Cpf Inválido! @@@'
+
 def listar_usuarios(usuarios):
     ...
 def main():
@@ -198,37 +235,8 @@ def main():
             print('===== Dados Pessoais =====')
             cpf_user = input('Digite Seu Cpf \n => ')
             validate_cpf = validar_cpf(cpfEnviado=cpf_user)
-            if validate_cpf is True:
-                os.system('cls')
-                name_user = input('Digite seu Nome \n => ')
-                validate_name =  name_user.isdigit()
-                if validate_name is False:
-                    os.system('cls')
-                    print('===== Endereço =====')
-                    state = input ('Digite o seu Estado \n => ')
-                    cep = input('Digite o seu CEP \n => ')
-                    city = input('Digite a sua Cidade \n => ')
-                    district = input('Digite o seu Bairro \n => ')
-                    number_house = input('Digite o Número da sua casa \n => ')
-                    validade_number_house = number_house.isdigit()
-                    if validade_number_house == True:
-                        os.system('cls')
-                        number_phone = input('Digite o seu Número de telefone \n =>')
-                        validade_number_phone = number_phone.isdigit()
-                        if validade_number_phone is True:
-                            registrando_user = {'cpf': cpf_user , 'name': name_user , 'phone': number_phone , 'adders': {'state': state , 'cep': cep , 'city': city , 'district': district , 'numberHouse': number_house}}
-                        else:
-                            print('@@@ Número de Telefone Inválido. ex: 81997665123 @@@')
-                    else:
-                        print('@@@ Número Inválido. ex: "44" @@@')
-
-                else:
-                    print('@@@ Nome Inválido , Você deve inserir um Nome Real @@@')
-
-            else:
-                print('@@@ Cpf Inválido! @@@')
-
-
+            ver = criar_usuario(cpf_enviado= cpf_user, validate_cpf=validate_cpf)
+            print(ver)
 
         elif opcao == 'q':
             break
