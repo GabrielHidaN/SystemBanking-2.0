@@ -46,7 +46,6 @@ def validar_cpf(cpfEnviado):
     cpfGerado = f'{noveDigitos}{primeiroDigito}{segundoDigito}'
 
 
-    valido = None
 
     if cpfEnviado == cpfGerado :
       valido = True
@@ -122,7 +121,9 @@ def exibir_extrato(saldo , / , * , extrato):
     '''
     return   saldoTotal , extrato
 
-def criar_usuario(usuarios):
+def criar_usuario(usuario):
+    ...
+def listar_usuarios(usuarios):
     ...
 def main():
     LIMITE_SAQUES = 3
@@ -193,7 +194,34 @@ def main():
             ...
 
         elif opcao=='u':
-            ...
+            os.system('cls')
+            print('===== Dados Pessoais =====')
+            cpf_user = input('Digite Seu Cpf \n => ')
+            validate_cpf = validar_cpf(cpfEnviado=cpf_user)
+            if validate_cpf is True:
+                os.system('cls')
+                name_user = input('Digite seu Nome \n => ')
+                validate_name =  name_user.isdigit()
+                if validate_name == False:
+                    os.system('cls')
+                    print('===== Endereço =====')
+                    state = input ('Digite o seu Estado \n => ')
+                    cep = input('Digite o seu CEP \n => ')
+                    city = input('Digite a sua Cidade \n => ')
+                    district = input('Digite o seu Bairro \n => ')
+                    number_house = input('Digite o Número da sua casa \n => ')
+                    validade_number_house = number_house.isdigit()
+                    if validade_number_house == True:
+                        os.system('cls')
+                        number_phone = input('Digite o seu Número de telefone \n =>')
+                        validade_number_phone = number_phone.isdigit()
+                        if validade_number_phone == True:
+
+                            ...
+
+            else:
+                print('Cpf Inválido!')
+
 
 
         elif opcao == 'q':
