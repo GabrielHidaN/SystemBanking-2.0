@@ -144,21 +144,21 @@ def criar_usuario(cpf_enviado , validate_cpf):
                 os.system('cls')
                 number_phone = input('Digite o seu Número de telefone \n =>')
                 validade_number_phone = number_phone.isdigit()
-                
+
                 if validade_number_phone is True:
                     registrando_user = {'cpf': cpf_user , 'name': name_user , 'phone': number_phone , 'adders': {'state': state , 'cep': cep , 'city': city , 'district': district , 'numberHouse': number_house}}
 
                     return registrando_user
                 else:
-                    return '@@@ Número de Telefone Inválido. ex: 81997665123 @@@'
+                    print('@@@ Número de Telefone Inválido. ex: 81997665123 @@@')
             else:
-                return '@@@ Número Inválido. ex: "44" @@@'
+                print('@@@ Número Inválido. ex: "44" @@@')
 
         else:
-            return '@@@ Nome Inválido , Você deve inserir um Nome Real @@@'
+            print( '@@@ Nome Inválido , Você deve inserir um Nome Real @@@')
 
     else:
-        return '@@@ Cpf Inválido! @@@'
+        print('@@@ Cpf Inválido! @@@')
 
 def listar_usuarios(usuarios):
     ...
@@ -235,14 +235,17 @@ def main():
             print('===== Dados Pessoais =====')
             cpf_user = input('Digite Seu Cpf \n => ')
             validate_cpf = validar_cpf(cpfEnviado=cpf_user)
-            ver = criar_usuario(cpf_enviado= cpf_user, validate_cpf=validate_cpf)
-            print(ver)
+            new_user = criar_usuario(cpf_enviado= cpf_user, validate_cpf=validate_cpf)
+            if new_user is not None:
+                usuarios.append(new_user)
+
+
 
         elif opcao == 'q':
             break
 
         else:
-            print()
+            print('opcoes invalidas')
 
 
 main()
