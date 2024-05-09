@@ -188,7 +188,7 @@ def main():
                     print(i)
 
         elif opcao == 'c':
-            ...
+            print(usuarios)
 
         elif opcao == 'l':
             ...
@@ -202,7 +202,7 @@ def main():
                 os.system('cls')
                 name_user = input('Digite seu Nome \n => ')
                 validate_name =  name_user.isdigit()
-                if validate_name == False:
+                if validate_name is False:
                     os.system('cls')
                     print('===== Endereço =====')
                     state = input ('Digite o seu Estado \n => ')
@@ -215,12 +215,18 @@ def main():
                         os.system('cls')
                         number_phone = input('Digite o seu Número de telefone \n =>')
                         validade_number_phone = number_phone.isdigit()
-                        if validade_number_phone == True:
+                        if validade_number_phone is True:
+                            registrando_user = {'cpf': cpf_user , 'name': name_user , 'phone': number_phone , 'adders': {'state': state , 'cep': cep , 'city': city , 'district': district , 'numberHouse': number_house}}
+                        else:
+                            print('@@@ Número de Telefone Inválido. ex: 81997665123 @@@')
+                    else:
+                        print('@@@ Número Inválido. ex: "44" @@@')
 
-                            ...
+                else:
+                    print('@@@ Nome Inválido , Você deve inserir um Nome Real @@@')
 
             else:
-                print('Cpf Inválido!')
+                print('@@@ Cpf Inválido! @@@')
 
 
 
