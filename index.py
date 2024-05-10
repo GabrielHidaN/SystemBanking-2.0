@@ -20,39 +20,51 @@ def validar_cpf(cpfEnviado):
     resultado_digito_1 = 0
 
     cpfEnviado = cpfEnviado
-    noveDigitos = cpfEnviado[:9]
+    flag_cpf = False
+    try:
+        int(cpfEnviado)
+        flag_cpf = True
+    except ValueError:
+        print('@@@ Cpf inválido! O Cpf deve conter esse formato [ 95946473026 ]')
+    except:
+        print('@@@ ERROR desconhecido @@@')
 
-    regressar1 = 10
-    for digito in noveDigitos:
-      resultado_digito_1 += int(digito) * int(regressar1)
-      regressar1 -= 1
-    primeiroDigito = (resultado_digito_1 * 10) % 11
+    if flag_cpf is True:
 
-    primeiroDigito = primeiroDigito if primeiroDigito <= 9 else 0
+        noveDigitos = cpfEnviado[:9]
 
+        regressar1 = 10
+        for digito in noveDigitos:
+          resultado_digito_1 += int(digito) * int(regressar1)
+          regressar1 -= 1
+        primeiroDigito = (resultado_digito_1 * 10) % 11
 
-
-    dezDigitos = noveDigitos + str(primeiroDigito)
-    regressar2 = 11
-
-    resultado2 = 0
-
-    for digito in dezDigitos:
-      resultado2 += int(digito) * regressar2
-      regressar2 -= 1
-    segundoDigito = (resultado2 * 10) % 11
-    segundoDigito= segundoDigito if segundoDigito <= 9 else 0
-
-    cpfGerado = f'{noveDigitos}{primeiroDigito}{segundoDigito}'
+        primeiroDigito = primeiroDigito if primeiroDigito <= 9 else 0
 
 
 
-    if cpfEnviado == cpfGerado :
-      valido = True
-    else:
-      valido = False
+        dezDigitos = noveDigitos + str(primeiroDigito)
+        regressar2 = 11
 
-    return valido
+        resultado2 = 0
+
+        for digito in dezDigitos:
+          resultado2 += int(digito) * regressar2
+          regressar2 -= 1
+        segundoDigito = (resultado2 * 10) % 11
+        segundoDigito= segundoDigito if segundoDigito <= 9 else 0
+
+        cpfGerado = f'{noveDigitos}{primeiroDigito}{segundoDigito}'
+
+
+
+        if cpfEnviado == cpfGerado :
+          valido = True
+        else:
+          valido = False
+
+        return valido
+
 
 def depositar(saldo, valor, extrato,data_e_hora_atuais, /):
     os.system('cls')
@@ -157,8 +169,6 @@ def criar_usuario(cpf_enviado , validate_cpf):
         else:
             print( '@@@ Nome Inválido , Você deve inserir um Nome Real @@@')
 
-    else:
-        print('@@@ Cpf Inválido! @@@')
 
 def listar_usuarios(usuarios):
     ...
@@ -225,7 +235,7 @@ def main():
                     print(i)
 
         elif opcao == 'c':
-            print(usuarios)
+            print(usuarios[0]['cpf'])
 
         elif opcao == 'l':
             ...
@@ -234,11 +244,11 @@ def main():
             os.system('cls')
             print('===== Dados Pessoais =====')
             cpf_user = input('Digite Seu Cpf \n => ')
+
             validate_cpf = validar_cpf(cpfEnviado=cpf_user)
-            new_user = criar_usuario(cpf_enviado= cpf_user, validate_cpf=validate_cpf)
+            new_user = criar_usuario(cpf_enviado= cpf_user,       validate_cpf=validate_cpf)
             if new_user is not None:
                 usuarios.append(new_user)
-
 
 
         elif opcao == 'q':
