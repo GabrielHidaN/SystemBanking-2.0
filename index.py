@@ -132,41 +132,59 @@ def exibir_extrato(saldo , / , * , extrato):
     '''
     return   saldoTotal , extrato
 
-def criar_usuario(cpf_enviado , validate_cpf):
+def criar_usuario( usuarios , cpf_enviado , validate_cpf):
+    os.system('cls')
     cpf_user = cpf_enviado
     validate_cpf = validate_cpf
+    usuarios = usuarios
+
+    flag_authorization = True
 
     if validate_cpf is True:
-        os.system('cls')
-        name_user = input('Digite seu Nome \n => ')
-        validate_name =  name_user.isdigit()
 
-        if validate_name is False:
-            os.system('cls')
-            print('===== Endereço =====')
-            state = input ('Digite o seu Estado \n => ')
-            cep = input('Digite o seu CEP \n => ')
-            city = input('Digite a sua Cidade \n => ')
-            district = input('Digite o seu Bairro \n => ')
-            number_house = input('Digite o Número da sua casa \n => ')
-            validade_number_house = number_house.isdigit()
+        #Verificar se o cpf ja foi registrado
 
-            if validade_number_house == True:
-                os.system('cls')
-                number_phone = input('Digite o seu Número de telefone \n =>')
-                validade_number_phone = number_phone.isdigit()
-
-                if validade_number_phone is True:
-                    registrando_user = {'cpf': cpf_user , 'name': name_user , 'phone': number_phone , 'adders': {'state': state , 'cep': cep , 'city': city , 'district': district , 'numberHouse': number_house}}
-
-                    return registrando_user
+        if (len(usuarios) > 0 ):
+            for user in usuarios:
+                if cpf_user == user['cpf']:
+                    print('@@@ Este CPF ja está registrado! @@@')
+                    flag_authorization = None
                 else:
-                    print('@@@ Número de Telefone Inválido. ex: 81997665123 @@@')
-            else:
-                print('@@@ Número Inválido. ex: "44" @@@')
+                    flag_authorization = True
 
-        else:
-            print( '@@@ Nome Inválido , Você deve inserir um Nome Real @@@')
+ 
+        if flag_authorization is True:
+            name_user = input('Digite seu Nome \n => ')
+            validate_name =  name_user.isdigit()
+
+            if validate_name is False:
+                os.system('cls')
+                print('===== Endereço =====')
+                state = input ('Digite o seu Estado \n => ')
+                cep = input('Digite o seu CEP \n => ')
+                city = input('Digite a sua Cidade \n => ')
+                district = input('Digite o seu Bairro \n => ')
+                number_house = input('Digite o Número da sua casa \n => ')
+                validade_number_house = number_house.isdigit()
+
+                if validade_number_house == True:
+                    os.system('cls')
+                    number_phone = input('Digite o seu Número de telefone \n =>')
+                    validade_number_phone = number_phone.isdigit()
+
+                    if validade_number_phone is True:
+                        registrando_user = {'cpf': cpf_user , 'name': name_user ,   'phone': number_phone , 'adders': {'state': state , 'cep':    cep , 'city': city , 'district': district , 'numberHouse':     number_house}}
+
+                        return registrando_user
+                    else:
+                        print('@@@ Número de Telefone Inválido. ex: 81997665123     @@@')
+                else:
+                    print('@@@ Número Inválido. ex: "44" @@@')
+
+            else:
+                print( '@@@ Nome Inválido , Você deve inserir um Nome Real @@@')
+    else:
+        print('@@@ CPF Inválido @@@')
 
 
 def listar_usuarios(usuarios):
@@ -244,20 +262,13 @@ def main():
             print('===== Dados Pessoais =====')
             cpf_user = input('Digite Seu Cpf \n => ')
             str(cpf_user)
-            
-            # [Tratar] Percorrer a lista e verificar os CPF
 
-            if (len(usuarios) > 0) :
-                verif_cpf = usuarios[0] ['cpf']
-                if cpf_user == verif_cpf:
-                    print('@@@ este Cpf ja foi registrado @@@')
 
-            else:
 
-                validate_cpf = validar_cpf(cpfEnviado=cpf_user)
-                new_user = criar_usuario(cpf_enviado= cpf_user,       validate_cpf=validate_cpf)
-                if new_user is not None:
-                    usuarios.append(new_user)
+            validate_cpf = validar_cpf(cpfEnviado=cpf_user)
+            new_user = criar_usuario(usuarios= usuarios , cpf_enviado= cpf_user,       validate_cpf=validate_cpf)
+            if new_user is not None:
+                 usuarios.append(new_user)
 
 
         elif opcao == 'q':
