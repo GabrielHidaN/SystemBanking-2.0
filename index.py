@@ -136,7 +136,7 @@ def exibir_extrato(saldo , / , * , extrato):
     return   saldoTotal , extrato
 
 def criar_usuario( usuarios , cpf_enviado , validate_cpf):
-    
+
     cpf_user = cpf_enviado
     validate_cpf = validate_cpf
     usuarios = usuarios
@@ -183,7 +183,7 @@ def criar_usuario( usuarios , cpf_enviado , validate_cpf):
         print('@@@ CPF Inválido @@@')
 
 
-def listar_usuarios(usuarios):
+def listar_contas(usuarios):
     ...
 def main():
     LIMITE_SAQUES = 3
@@ -201,7 +201,7 @@ def main():
 
     while True:
         opcao = menu()
-
+        #Deposito
         if opcao == 'd':
             os.system('cls')
             valor = input("Informe o valor do depósito: ")
@@ -219,7 +219,7 @@ def main():
             if validacao == True:
 
                 saldo, extrato  = depositar(saldo, valor, extrato,data_e_hora_atuais)
-
+        #Saque
         elif opcao == 's':
             os.system('cls')
             valor = input("Informe o valor do saque: ")
@@ -237,7 +237,7 @@ def main():
 
             if validacao == True:
                 saldo, extrato , numero_saques = sacar(saldo=saldo , valor=valor ,  extrato= extrato , limite= limite , numero_saques= numero_saques,    limite_saques= LIMITE_SAQUES , data_e_hora_atuais=     data_e_hora_atuais)
-
+        #Extrato
         elif opcao == 'e':
             os.system('cls')
             if len(extrato) == 0:
@@ -247,13 +247,26 @@ def main():
                 extratos = list(extratos)
                 for  i in extratos:
                     print(i)
-
+        #Nova Conta
         elif opcao == 'c':
-            ...
+            new_accont_cpf = input(f'Digite o CPF do Usuário que Deseja Abrir uma nova Conta\n =>')
+            for user in usuarios:
+                if new_accont_cpf == user['cpf']:
+                    os.system('cls')
+                    menu_new_accont = '''
+                    [1]\t Conta Poupança
+                    [2]\t Conta Corrente
+                    =>
+                    '''
+                    return input(textwrap.dedent(menu_new_accont))
 
+                else:
+                    print('nao encontrado!')
+
+        #Listar Contas
         elif opcao == 'l':
             ...
-
+        #Novo Usuário
         elif opcao=='u':
             os.system('cls')
             print('===== Dados Pessoais =====\n')
@@ -268,8 +281,7 @@ def main():
                  usuarios.append(new_user)
                  os.system('cls')
                  print(f'Usuário Registrado com Sucesso!')
-
-
+        #Sair
         elif opcao == 'q':
             break
 
