@@ -2,13 +2,6 @@ import textwrap
 import os
 from datetime import datetime
 
-def tela_inicio():
-        tela_inicial = """\n
-    ================ MENU ================
-    [1]\tEntrar
-    [2]\tRegistrar-se
-    [0]\tSair
-    => """
 def menu():
     menu = """\n
     ================ MENU ================
@@ -190,10 +183,34 @@ def criar_usuario( usuarios , cpf_enviado , validate_cpf):
         print('@@@ CPF Inválido @@@')
 
 
-def listar_contas(usuarios):
-    ...
-def criar_conta (usuarios , agencia , numero_contas  ):
-    ...
+def listar_contas(contas):
+    os.system('cls')
+    return contas
+
+def criar_conta (contas , saldo , numero_contas , agencia = None ):
+    accont_type = input(f'\n === Qual tipo de Conta Você Deseja Criar ===\n [1] Poupança \n [2] Corrente \n=>')
+    if accont_type == '1':
+        os.system('cls')
+        print(' Conta Poupança Criada com sucesso!')
+        contas += f'''
+        ======================================================================
+        Conta : Poupança    Saldo: {saldo}    Agencia: {agencia}
+        ======================================================================
+        '''
+        numero_contas += 1
+        return contas ,  numero_contas
+    elif accont_type == '2':
+        os.system('cls')
+        print(' Conta Corrente Criada com sucesso!')
+        contas += f'''
+        ======================================================================
+        Conta : Corrente    Saldo: {saldo}    Agencia: {agencia}
+        ======================================================================
+        \n'''
+        numero_contas += 1
+        return contas ,  numero_contas
+
+
 
 def main():
     LIMITE_SAQUES = 3
@@ -207,7 +224,7 @@ def main():
 
     usuarios = []
     numero_contas = 0
-    contas = []
+    contas = ""
 
     while True:
 
@@ -263,21 +280,31 @@ def main():
          new_accont_cpf = input(f'Digite o CPF do Usuário que Deseja Abrir   uma nova Conta\n =>')
          for user in usuarios:
              if new_accont_cpf == user['cpf']:
-                 os.system('cls')
+                os.system('cls')
+                if numero_contas < 3:
+                    contas ,  numero_contas  = criar_conta(contas= contas , agencia= AGENCIA ,saldo=saldo ,  numero_contas= numero_contas)
+
+                else:
+                 print('@@@ Você alcançou o Número total de Contas @@@')
+
+
              else :
                  print('nao encontrado!')
 
 
+
      #Listar Contas
      elif opcao == 'l':
-         os.system('cls')
-         print('=== Listagem de Contas ===\n')
-         accont_list = input('Digite o Seu CPF para vizualizar as suas   Contas Ativas \n =>')
-         for user in usuarios:
-             if accont_list == user['cpf']:
-                 ...
-             else:
-                 print('@@@ Conta Não Encontrada é necessário que Você se Registre como um novo usuário! @@@')
+        os.system('cls')
+        print('=== Listagem de Contas ===\n')
+        if len(contas) == 0:
+            print('@@@ Nenhuma conta foi criada! @@@')
+        else:
+            contas_ = listar_contas(contas=contas)
+            contas_ = list(contas_)
+            print(contas_)
+
+
 
      #Novo Usuário
      elif opcao=='u':
