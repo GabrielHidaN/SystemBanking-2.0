@@ -301,7 +301,6 @@ def main():
             print('@@@ Nenhuma conta foi criada! @@@')
         else:
             contas_ = listar_contas(contas=contas)
-            contas_ = list(contas_)
             print(contas_)
 
 
